@@ -4,6 +4,9 @@ import javax.swing.JPanel;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import uniquindio.edu.co.redes2.gui.ChatUI;
+
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -82,28 +85,6 @@ public class ContenedorIniciarSesion extends JPanel {
 		springLayout.putConstraint(SpringLayout.WEST, txtCorreoElectronico, 105, SpringLayout.WEST, this);
 		txtCorreoElectronico.setBorder(new LineBorder(bordeTexto));
 		txtCorreoElectronico.setFont(fuenteTexto);
-		txtCorreoElectronico.addKeyListener(new KeyListener() {
-			
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-				
-			}
-			
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-				// TODO Auto-generated method stub
-				txtCorreoElectronico.setText("");
-				txtCorreoElectronico.setForeground(Color.BLACK);
-			}
-		});
 		txtCorreoElectronico.addFocusListener(new FocusListener() {
 			
 			@Override
@@ -118,8 +99,8 @@ public class ContenedorIniciarSesion extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				if(txtCorreoElectronico.getText().equals("Ingresar correo electr\u00F3nico")){
-					
-					//txtCorreoElectronico.setForeground(Color.BLACK);
+					txtCorreoElectronico.setText("");
+					txtCorreoElectronico.setForeground(Color.BLACK);
 				}
 				
 			}
@@ -147,7 +128,6 @@ public class ContenedorIniciarSesion extends JPanel {
 		txtContrasena.setFont(fuenteTexto);
 		springLayout.putConstraint(SpringLayout.NORTH, txtContrasena, 445, SpringLayout.NORTH, this);
 		springLayout.putConstraint(SpringLayout.WEST, txtContrasena, 105, SpringLayout.WEST, this);
-		
 		txtContrasena.setColumns(10);
 		txtContrasena.addFocusListener(new FocusListener() {
 			
@@ -181,6 +161,12 @@ public class ContenedorIniciarSesion extends JPanel {
 		add(lblBienvenido);
 		
 		btnIngresar = new JButton("INGRESAR");
+		btnIngresar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ChatUI chatUI= new ChatUI();
+				chatUI.setVisible(true);
+			}
+		});
 		btnIngresar.setToolTipText("");
 		btnIngresar.setForeground(Color.WHITE);
 		btnIngresar.setFont(fuenteBoton);

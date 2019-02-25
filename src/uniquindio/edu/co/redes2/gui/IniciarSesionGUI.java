@@ -20,6 +20,9 @@ import uniquindio.edu.co.redes2.contenedores.ContenedorIniciarSesion;
 import java.awt.Color;
 import java.awt.Label;
 import java.awt.Font;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+
 import javax.swing.JSeparator;
 
 public class IniciarSesionGUI extends JFrame {
@@ -31,7 +34,9 @@ public class IniciarSesionGUI extends JFrame {
 	 */
 	
 	private Color fondo;
-	private Color fondoPanel;
+	
+	static GraphicsDevice device = GraphicsEnvironment
+	        .getLocalGraphicsEnvironment().getScreenDevices()[0];
 	/**
 	 * Launch the application.
 	 */
@@ -52,11 +57,12 @@ public class IniciarSesionGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public IniciarSesionGUI() {
+		this.setExtendedState(MAXIMIZED_BOTH);
+		setUndecorated(true);
 		fondo = new Color(0, 136, 176, 30);
-		fondoPanel = new Color(0, 136, 176, 61);
 		contenedorIniciarSesion = new ContenedorIniciarSesion();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setExtendedState(MAXIMIZED_BOTH);
+		
 		SpringLayout springLayout = new SpringLayout();
 		springLayout.putConstraint(SpringLayout.NORTH, contenedorIniciarSesion, 20, SpringLayout.NORTH, getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, contenedorIniciarSesion, 150, SpringLayout.WEST, getContentPane());
