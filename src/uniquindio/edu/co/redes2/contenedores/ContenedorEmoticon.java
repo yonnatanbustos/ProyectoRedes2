@@ -5,10 +5,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
 import rsscalelabel.RSScaleLabel;
 import uniquindio.edu.co.redes2.logica.Emoticon;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
@@ -34,8 +36,10 @@ public class ContenedorEmoticon extends JPanel {
 	 * Create the panel.
 	 */
 	public ContenedorEmoticon() {
-		setLayout(new GridLayout(5, 10));
+		setLayout(new GridLayout(3, 20));
 		emoticon = new Emoticon();
+		setBorder(new LineBorder(new Color(221, 238, 214)));
+		setBackground(new Color(221, 238, 214));
 		inicializarMatriz();
 //		
 		

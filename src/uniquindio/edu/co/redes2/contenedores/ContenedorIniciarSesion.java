@@ -171,6 +171,7 @@ public class ContenedorIniciarSesion extends JPanel {
 		btnIngresar.setForeground(Color.WHITE);
 		btnIngresar.setFont(fuenteBoton);
 		btnIngresar.setBackground(fondoBoton);
+		btnIngresar.setOpaque(true);
 		springLayout.putConstraint(SpringLayout.NORTH, btnIngresar, 580, SpringLayout.NORTH, this);
 		springLayout.putConstraint(SpringLayout.WEST, btnIngresar, 335, SpringLayout.WEST, this);
 		add(btnIngresar);

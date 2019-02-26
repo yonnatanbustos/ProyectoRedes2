@@ -44,7 +44,7 @@ public class ChatUI extends JFrame {
 	
 	private PanelDerecho panelDerecho2;
 	
-	private SpringLayout layoutIzquierdo, layoutDerecho;
+	private SpringLayout layoutIzquierdo;
 
 
 	/**
@@ -57,9 +57,8 @@ public class ChatUI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		SpringLayout springLayout = new SpringLayout();
 		layoutIzquierdo = new SpringLayout();
-		layoutDerecho = new SpringLayout();
 		getContentPane().setLayout(springLayout);
-				
+					
 		
 		panelIzquierdo = new JPanel();
 		springLayout.putConstraint(SpringLayout.NORTH, panelIzquierdo, 10, SpringLayout.NORTH, getContentPane());
@@ -69,7 +68,7 @@ public class ChatUI extends JFrame {
 		panelIzquierdo.setBorder(new LineBorder(new Color(0, 0, 0)));
 		getContentPane().add(panelIzquierdo);
 		
-		panelDerecho2 = new PanelDerecho();
+		panelDerecho2 = new PanelDerecho(this);
 		springLayout.putConstraint(SpringLayout.NORTH, panelDerecho2, 10, SpringLayout.NORTH, getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, panelDerecho2, -10, SpringLayout.SOUTH, getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, panelDerecho2, -10, SpringLayout.EAST, getContentPane());
@@ -80,6 +79,7 @@ public class ChatUI extends JFrame {
 		panelIzquierdo.setLayout(layoutIzquierdo);
 		
 		cargarContenedoresPorDefecto();
+		cargarContenedorEmoticones();
 		
 	}
 	
@@ -116,5 +116,21 @@ public class ChatUI extends JFrame {
 		panelIzquierdo.remove(contenedorPerfil);
 		panelIzquierdo.updateUI();
 	}
+	
+	public void cargarContenedorEmoticones(){
+		contenedorEmoticon = new ContenedorEmoticon();
+		panelDerecho2.getSpringLayoutMensajes().putConstraint(SpringLayout.SOUTH, contenedorEmoticon, -5, SpringLayout.SOUTH, panelDerecho2.getPanelMensajes());
+		panelDerecho2.getSpringLayoutMensajes().putConstraint(SpringLayout.WEST, contenedorEmoticon, 20, SpringLayout.WEST, panelDerecho2.getPanelMensajes());
+		panelDerecho2.getSpringLayoutMensajes().putConstraint(SpringLayout.EAST, contenedorEmoticon, -20, SpringLayout.EAST, panelDerecho2.getPanelMensajes());
+		panelDerecho2.getSpringLayoutMensajes().putConstraint(SpringLayout.NORTH, contenedorEmoticon, 350, SpringLayout.NORTH, panelDerecho2.getPanelMensajes());
+		panelDerecho2.getPanelMensajes().add(contenedorEmoticon);
+		panelDerecho2.updateUI();
+		contenedorEmoticon.setVisible(false);
+		
+	}
 
+	
+	public ContenedorEmoticon getContenedorEmoticon() {
+		return contenedorEmoticon;
+	}
 }
