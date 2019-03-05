@@ -32,8 +32,8 @@ public class VentanaConfiguracion extends JDialog{
         JLabel lbPuerto = new JLabel("Puerto:");
         
         tfUsuario = new JTextField();
-        tfHost = new JTextField("localhost");
-        tfPuerto = new JTextField("1234");
+        tfHost = new JTextField("18.216.117.225");
+        tfPuerto = new JTextField("4040");
         
         JButton btAceptar = new JButton("Aceptar");
         btAceptar.addActionListener(new ActionListener() {
