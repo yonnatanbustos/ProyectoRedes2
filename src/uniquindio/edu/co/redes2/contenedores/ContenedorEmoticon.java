@@ -11,6 +11,7 @@ import rsscalelabel.RSScaleLabel;
 import uniquindio.edu.co.redes2.logica.Emoticon;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
@@ -56,6 +57,7 @@ public class ContenedorEmoticon extends JPanel {
 			JLabel label= new JLabel(imageIcon);
 			label.setSize(30, 30);
 			rsscalelabel.RSScaleLabel.setScaleLabel(label, url.getPath());
+			label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			label.addMouseListener(new MouseListener() {
 				
 				@Override

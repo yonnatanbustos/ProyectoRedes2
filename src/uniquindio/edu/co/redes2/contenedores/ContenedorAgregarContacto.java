@@ -3,14 +3,20 @@ package uniquindio.edu.co.redes2.contenedores;
 import javax.swing.JPanel;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.net.URL;
 
 import javax.swing.JLabel;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+
+import uniquindio.edu.co.redes2.gui.ChatUI;
+
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -25,32 +31,32 @@ public class ContenedorAgregarContacto extends JPanel {
 
 
 
-	private JLabel lblTitulo;
+	private JLabel lblTitulo, lblIcono;
 	private JTextField txtNombreContacto;
 	
 	private JButton btnBuscar;
 	
 	private JPanel panel;
+	
+	private ChatUI chatUI;
 
 	/**
 	 * Create the panel.
 	 */
-	public ContenedorAgregarContacto() {
+	public ContenedorAgregarContacto(ChatUI chatUI) {
+		this.chatUI = chatUI;
 		setBackground(Color.WHITE);
 		SpringLayout springLayout = new SpringLayout();
 		setLayout(springLayout);
 
 		lblTitulo = new JLabel("Agregar");
 		springLayout.putConstraint(SpringLayout.NORTH, lblTitulo, 0, SpringLayout.NORTH, this);
-		springLayout.putConstraint(SpringLayout.WEST, lblTitulo, 0, SpringLayout.WEST, this);
 		springLayout.putConstraint(SpringLayout.EAST, lblTitulo, 0, SpringLayout.EAST, this);
 		springLayout.putConstraint(SpringLayout.SOUTH, lblTitulo, 110, SpringLayout.NORTH, this);
 		lblTitulo.setFont(new Font("Georgia", Font.PLAIN, 72));
-		lblTitulo.setHorizontalAlignment(SwingConstants.LEFT);
+		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setBackground(COLOR_FONDO_TITULO);
-		lblTitulo.setBorder(new LineBorder(COLOR_FONDO_TITULO));
-		springLayout.putConstraint(SpringLayout.NORTH, lblTitulo, 0, SpringLayout.NORTH, this);
-		springLayout.putConstraint(SpringLayout.WEST, lblTitulo, 0, SpringLayout.WEST, this);
+		lblTitulo.setOpaque(true);
 		add(lblTitulo);
 
 		JLabel lblNombreDelContacto = new JLabel("Nombre del contacto");
@@ -72,7 +78,52 @@ public class ContenedorAgregarContacto extends JPanel {
 		springLayout.putConstraint(SpringLayout.NORTH, btnBuscar, 0, SpringLayout.NORTH, txtNombreContacto);
 		btnBuscar.setBackground(COLOR_FONDO_TITULO);
 		btnBuscar.setForeground(COLOR_FONDO_TITULO);
+		btnBuscar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		add(btnBuscar);
+		
+		lblIcono = new JLabel();
+		springLayout.putConstraint(SpringLayout.NORTH, lblIcono, 0, SpringLayout.NORTH, this);
+		springLayout.putConstraint(SpringLayout.WEST, lblIcono, 0, SpringLayout.WEST, this);
+		springLayout.putConstraint(SpringLayout.SOUTH, lblIcono, 110, SpringLayout.NORTH, this);
+		springLayout.putConstraint(SpringLayout.WEST, lblTitulo, 0, SpringLayout.EAST, lblIcono);
+		lblIcono.setBackground(COLOR_FONDO_TITULO);
+		lblIcono.setOpaque(true);
+		lblIcono.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblIcono.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				chatUI.getContenedorAgregarContacto().setVisible(false);
+				chatUI.getContenedorPerfil().setVisible(true);
+				
+			}
+		});
+		add(lblIcono);
 		
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -93,7 +144,7 @@ public class ContenedorAgregarContacto extends JPanel {
 		ClassLoader cl = getClass().getClassLoader();
 		URL url = cl.getResource(RUTA_ICONO_VOLVER);
 		ImageIcon imageIcon = new ImageIcon(Toolkit.getDefaultToolkit().createImage(url));
-		lblTitulo.setIcon(imageIcon);
+		lblIcono.setIcon(imageIcon);
 		
 		url = cl.getResource(RUTA_ICONO_BUSCAR);
 		imageIcon = new ImageIcon(Toolkit.getDefaultToolkit().createImage(url));

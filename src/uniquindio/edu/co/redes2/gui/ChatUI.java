@@ -10,12 +10,14 @@ import javax.swing.SpringLayout;
 import javax.swing.border.LineBorder;
 import javax.swing.plaf.PanelUI;
 
+import uniquindio.edu.co.redes2.contenedores.ContenedorAdjuntar;
 import uniquindio.edu.co.redes2.contenedores.ContenedorAgregarContacto;
 import uniquindio.edu.co.redes2.contenedores.ContenedorContacto;
 import uniquindio.edu.co.redes2.contenedores.ContenedorEmoticon;
 import uniquindio.edu.co.redes2.contenedores.ContenedorPerfil;
 import uniquindio.edu.co.redes2.contenedores.ContenedorPrincipal;
 import uniquindio.edu.co.redes2.contenedores.ContenedorSolicitudAmistad;
+import uniquindio.edu.co.redes2.contenedores.ContenedoreSolicitudes;
 import uniquindio.edu.co.redes2.contenedores.PanelDerecho;
 
 import java.awt.Color;
@@ -27,22 +29,20 @@ public class ChatUI extends JFrame {
 	private JPanel contentPane;
 	
 	private JPanel panelIzquierdo;
-	
-	private JPanel panelDerecho;
-	
+		
 	private ContenedorAgregarContacto contenedorAgregarContacto;
-	
-	private ContenedorContacto contenedorContacto;
-	
+		
 	private ContenedorEmoticon contenedorEmoticon;
 	
 	private ContenedorPerfil contenedorPerfil;
-	
-	private ContenedorSolicitudAmistad contenedorSolicitudAmistad;
-	
+		
 	private ContenedorPrincipal contenedorPrincipal;
 	
+	private ContenedoreSolicitudes contenedoreSolicitudes;
+	
 	private PanelDerecho panelDerecho2;
+	
+	private ContenedorAdjuntar contenedorAdjuntar;
 	
 	private SpringLayout layoutIzquierdo;
 
@@ -78,19 +78,22 @@ public class ChatUI extends JFrame {
 		
 		panelIzquierdo.setLayout(layoutIzquierdo);
 		
-		cargarContenedoresPorDefecto();
+		cargarContenedorPrincipal();
 		cargarContenedorEmoticones();
+		cargarContenedorAdjuntar();
+		cargarContenedorPerfil();
+		cargarContenedorAgregarContacto();
+		cargarContendorSolicitudes();
 		
 	}
 	
 	
-	public void cargarContenedoresPorDefecto(){
+	public void cargarContenedorPrincipal(){
 		contenedorPrincipal = new ContenedorPrincipal(this);
 		layoutIzquierdo.putConstraint(SpringLayout.NORTH, contenedorPrincipal, 0, SpringLayout.NORTH, panelIzquierdo);
 		layoutIzquierdo.putConstraint(SpringLayout.WEST, contenedorPrincipal, 0, SpringLayout.WEST, panelIzquierdo);
 		layoutIzquierdo.putConstraint(SpringLayout.EAST, contenedorPrincipal, 0, SpringLayout.EAST, panelIzquierdo);
 		layoutIzquierdo.putConstraint(SpringLayout.SOUTH, contenedorPrincipal, 0, SpringLayout.SOUTH, panelIzquierdo);
-		panelIzquierdo.removeAll();
 		panelIzquierdo.updateUI();
 		panelIzquierdo.add(contenedorPrincipal);
 	}
@@ -102,19 +105,19 @@ public class ChatUI extends JFrame {
 		layoutIzquierdo.putConstraint(SpringLayout.EAST, contenedorPerfil, 0, SpringLayout.EAST, panelIzquierdo);
 		layoutIzquierdo.putConstraint(SpringLayout.SOUTH, contenedorPerfil, 0, SpringLayout.SOUTH, panelIzquierdo);
 		panelIzquierdo.add(contenedorPerfil);
-		panelIzquierdo.remove(contenedorPrincipal);
 		panelIzquierdo.updateUI();
+		contenedorPerfil.setVisible(false);
 	}
 	
 	public void cargarContenedorAgregarContacto(){
-		contenedorAgregarContacto = new ContenedorAgregarContacto();
+		contenedorAgregarContacto = new ContenedorAgregarContacto(this);
 		layoutIzquierdo.putConstraint(SpringLayout.NORTH, contenedorAgregarContacto, 0, SpringLayout.NORTH, panelIzquierdo);
 		layoutIzquierdo.putConstraint(SpringLayout.WEST, contenedorAgregarContacto, 0, SpringLayout.WEST, panelIzquierdo);
 		layoutIzquierdo.putConstraint(SpringLayout.EAST, contenedorAgregarContacto, 0, SpringLayout.EAST, panelIzquierdo);
 		layoutIzquierdo.putConstraint(SpringLayout.SOUTH, contenedorAgregarContacto, 0, SpringLayout.SOUTH, panelIzquierdo);
 		panelIzquierdo.add(contenedorAgregarContacto);
-		panelIzquierdo.remove(contenedorPerfil);
 		panelIzquierdo.updateUI();
+		contenedorAgregarContacto.setVisible(false);
 	}
 	
 	public void cargarContenedorEmoticones(){
@@ -128,9 +131,54 @@ public class ChatUI extends JFrame {
 		contenedorEmoticon.setVisible(false);
 		
 	}
+	
+	public void cargarContenedorAdjuntar(){
+		contenedorAdjuntar = new ContenedorAdjuntar(this);
+		panelDerecho2.getSpringLayoutMensajes().putConstraint(SpringLayout.SOUTH, contenedorAdjuntar, -5, SpringLayout.SOUTH, panelDerecho2.getPanelMensajes());
+		panelDerecho2.getSpringLayoutMensajes().putConstraint(SpringLayout.WEST, contenedorAdjuntar, 650, SpringLayout.WEST, panelDerecho2.getPanelMensajes());
+		panelDerecho2.getSpringLayoutMensajes().putConstraint(SpringLayout.EAST, contenedorAdjuntar, -20, SpringLayout.EAST, panelDerecho2.getPanelMensajes());
+		panelDerecho2.getSpringLayoutMensajes().putConstraint(SpringLayout.NORTH, contenedorAdjuntar, 480, SpringLayout.NORTH, panelDerecho2.getPanelMensajes());
+		panelDerecho2.getPanelMensajes().add(contenedorAdjuntar);
+		panelDerecho2.updateUI();
+		contenedorAdjuntar.setVisible(false);
+	}
+	
+	public void cargarContendorSolicitudes(){
+		contenedoreSolicitudes = new ContenedoreSolicitudes(this);
+		layoutIzquierdo.putConstraint(SpringLayout.NORTH, contenedoreSolicitudes, 0, SpringLayout.NORTH, panelIzquierdo);
+		layoutIzquierdo.putConstraint(SpringLayout.WEST, contenedoreSolicitudes, 0, SpringLayout.WEST, panelIzquierdo);
+		layoutIzquierdo.putConstraint(SpringLayout.EAST, contenedoreSolicitudes, 0, SpringLayout.EAST, panelIzquierdo);
+		layoutIzquierdo.putConstraint(SpringLayout.SOUTH, contenedoreSolicitudes, 0, SpringLayout.SOUTH, panelIzquierdo);
+		panelIzquierdo.add(contenedoreSolicitudes);
+		panelIzquierdo.updateUI();
+		contenedoreSolicitudes.setVisible(false);
+	}
+	
 
 	
 	public ContenedorEmoticon getContenedorEmoticon() {
 		return contenedorEmoticon;
 	}
+	
+	
+	public ContenedorAdjuntar getContenedorAdjuntar() {
+		return contenedorAdjuntar;
+	}
+	
+	public ContenedorAgregarContacto getContenedorAgregarContacto() {
+		return contenedorAgregarContacto;
+	}
+	
+	public ContenedoreSolicitudes getContenedoreSolicitudes() {
+		return contenedoreSolicitudes;
+	}
+	
+	public ContenedorPrincipal getContenedorPrincipal() {
+		return contenedorPrincipal;
+	}
+	
+	public ContenedorPerfil getContenedorPerfil() {
+		return contenedorPerfil;
+	}
+	
 }

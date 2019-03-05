@@ -17,17 +17,18 @@ import javax.swing.border.LineBorder;
 import uniquindio.edu.co.redes2.gui.ChatUI;
 
 import java.awt.Color;
+import java.awt.Cursor;
 
 public class ContenedorPrincipal extends JPanel {
-	
+
 	private static final String RUTA_ICONO_USUARIO = "uniquindio/edu/co/redes2/resources/iconos/icon-usuario.png";
-	
+
 	private static final String RUTA_ICONO_AMIGOS = "uniquindio/edu/co/redes2/resources/iconos/icon-amigos.png";
 
 	private JLabel lblAmigos, lblUsuario;
-	
+
 	private JPanel panel;
-	
+
 	private ChatUI chatUI;
 
 	/**
@@ -38,16 +39,51 @@ public class ContenedorPrincipal extends JPanel {
 		SpringLayout springLayout = new SpringLayout();
 		setLayout(springLayout);
 		setBackground(Color.WHITE);
-		
+
 		lblUsuario = new JLabel();
 		springLayout.putConstraint(SpringLayout.NORTH, lblUsuario, 10, SpringLayout.NORTH, this);
 		springLayout.putConstraint(SpringLayout.WEST, lblUsuario, 10, SpringLayout.WEST, this);
+		lblUsuario.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblUsuario.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				chatUI.getContenedorPrincipal().setVisible(false);
+				chatUI.getContenedorPerfil().setVisible(true);
+			}
+		});
 		add(lblUsuario);
-		
+
 		lblAmigos = new JLabel();
 		springLayout.putConstraint(SpringLayout.NORTH, lblAmigos, 10, SpringLayout.NORTH, this);
 		springLayout.putConstraint(SpringLayout.EAST, lblAmigos, -10, SpringLayout.EAST, this);
-		lblUsuario.addMouseListener(new MouseListener() {
+		lblAmigos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblAmigos.addMouseListener(new MouseListener() {
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -76,13 +112,12 @@ public class ContenedorPrincipal extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				chatUI.cargarContenedorPerfil();
-				System.out.println("Contenedor cargado de perfil");
+				chatUI.getContenedorPrincipal().setVisible(false);
+				chatUI.getContenedoreSolicitudes().setVisible(true);
 			}
 		});
 		add(lblAmigos);
-		
-		
+
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		springLayout.putConstraint(SpringLayout.NORTH, panel, 60, SpringLayout.NORTH, lblUsuario);
@@ -90,20 +125,17 @@ public class ContenedorPrincipal extends JPanel {
 		springLayout.putConstraint(SpringLayout.SOUTH, panel, -10, SpringLayout.SOUTH, this);
 		springLayout.putConstraint(SpringLayout.EAST, panel, -10, SpringLayout.EAST, this);
 		add(panel);
-		
-		
+
 		cargarIconos();
 
 	}
-	
-	
-	
-	private void cargarIconos(){
+
+	private void cargarIconos() {
 		ClassLoader cl = getClass().getClassLoader();
 		URL url = cl.getResource(RUTA_ICONO_USUARIO);
 		ImageIcon imageIcon = new ImageIcon(Toolkit.getDefaultToolkit().createImage(url));
 		lblUsuario.setIcon(imageIcon);
-		
+
 		url = cl.getResource(RUTA_ICONO_AMIGOS);
 		imageIcon = new ImageIcon(Toolkit.getDefaultToolkit().createImage(url));
 		lblAmigos.setIcon(imageIcon);

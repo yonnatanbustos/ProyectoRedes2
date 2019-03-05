@@ -10,7 +10,6 @@ public class ServidorChat {
 	public static void main(String[] args) {
 
 		
-		//Logger logger = Logger.getLogger(ServidorChat.class);
 		int puerto =1234;
 		int maximoSocket=2;
 		ServerSocket servidor= null;
@@ -23,7 +22,6 @@ public class ServidorChat {
 			
 			//Bucle infinito para esperar conexiones
 			while(true){
-				//logger.info("Servidor a la espera de conexiones.");
 				System.out.println("Servidor a la espera de conexiones.");
 				socket = servidor.accept();
 				System.out.println("Cliente con la IP: "+socket.getInetAddress().getHostName()+ " conectado.");

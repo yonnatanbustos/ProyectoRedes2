@@ -40,7 +40,7 @@ public class ContenedorEscribir extends JPanel {
 
 	private ChatUI chatUI;
 
-	private boolean estado;
+	private boolean estadoEmoticon, estadoAdjuntar;
 
 	/**
 	 * Create the panel.
@@ -49,7 +49,8 @@ public class ContenedorEscribir extends JPanel {
 		this.chatUI = chatUI;
 		SpringLayout springLayout = new SpringLayout();
 		setLayout(springLayout);
-		estado = true;
+		estadoEmoticon = true;
+		estadoAdjuntar = true;
 
 		lblEmoticon = new JLabel();
 		springLayout.putConstraint(SpringLayout.NORTH, lblEmoticon, 5, SpringLayout.NORTH, this);
@@ -86,15 +87,19 @@ public class ContenedorEscribir extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				if (estado) {
-					estado = false;
-					chatUI.getContenedorEmoticon().setVisible(true);
-					cargarIconoX();
-				} else {
-					estado = true;
-					chatUI.getContenedorEmoticon().setVisible(false);
-					cargarIconos();
-				}
+					if(estadoEmoticon){
+						estadoEmoticon = false;
+						chatUI.getContenedorEmoticon().setVisible(true);
+						cargarIconoX();
+					}else{
+						estadoEmoticon = true;
+						chatUI.getContenedorEmoticon().setVisible(false);
+						cargarIconos();
+					
+					}
+				
+				
+					
 			}
 		});
 		add(lblEmoticon);
@@ -111,6 +116,45 @@ public class ContenedorEscribir extends JPanel {
 		springLayout.putConstraint(SpringLayout.NORTH, lblAdjuntar, 5, SpringLayout.NORTH, this);
 		springLayout.putConstraint(SpringLayout.WEST, lblAdjuntar, 10, SpringLayout.EAST, txtEscribir);
 		springLayout.putConstraint(SpringLayout.SOUTH, lblAdjuntar, -5, SpringLayout.SOUTH, this);
+		lblAdjuntar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblAdjuntar.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				if(estadoAdjuntar){
+					estadoAdjuntar = false;
+					chatUI.getContenedorAdjuntar().setVisible(true);
+				}else{
+					estadoAdjuntar = true;
+					chatUI.getContenedorAdjuntar().setVisible(false);
+				}
+			}
+		});
 		add(lblAdjuntar);
 
 		btnEnviar = new JButton("ENVIAR");
@@ -118,6 +162,7 @@ public class ContenedorEscribir extends JPanel {
 		springLayout.putConstraint(SpringLayout.NORTH, btnEnviar, 5, SpringLayout.NORTH, this);
 		springLayout.putConstraint(SpringLayout.SOUTH, btnEnviar, -5, SpringLayout.SOUTH, this);
 		springLayout.putConstraint(SpringLayout.WEST, btnEnviar, 10, SpringLayout.EAST, lblAdjuntar);
+		btnEnviar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		add(btnEnviar);
 
 		cargarIconos();
